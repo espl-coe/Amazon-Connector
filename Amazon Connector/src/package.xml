@@ -5,11 +5,13 @@
         <members>AWS4SignerForQueryParameterAuth</members>
         <members>AmazonContentRetrieverBatch</members>
         <members>AmazonHandler</members>
+        <members>AmazonHandler_1</members>
         <members>AmazonHandler_clone</members>
         <members>AmazonQueueHandler</members>
         <members>AmazonSNSHandler</members>
         <members>EventBean</members>
         <members>EventInterface</members>
+        <members>PresignedUrl</members>
         <members>PresignedUrlSample</members>
         <name>ApexClass</name>
     </types>

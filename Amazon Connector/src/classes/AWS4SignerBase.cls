@@ -23,7 +23,7 @@ public virtual class AWS4SignerBase {
     protected String httpMethod;
     protected String serviceName;
     protected String regionName;
-    
+
     protected  Datetime dateTimeFormat;
     protected  Datetime dateStampFormat;
 
@@ -120,7 +120,7 @@ public virtual class AWS4SignerBase {
 
     /**
      * Returns the canonicalized resource path for the service endpoint.
-    */
+     */
     public static String getCanonicalizedResourcePath(URL endpoint) {
         if ( endpoint == null ) {
             return '/';
@@ -130,11 +130,12 @@ public virtual class AWS4SignerBase {
         if ( path == null || path=='') {
             return '/';
         }
-        
         String encodedPath = urlEncode(path, true);
+        encodedPath=encodedPath.replace('%2B','%20');
         if (encodedPath.startsWith('/')) {
             return encodedPath;
-        } else {
+        } 
+        else {
             return '/'+encodedPath;
         }
     }
@@ -147,7 +148,8 @@ public virtual class AWS4SignerBase {
      * joining them, in order, separating key value pairs with an '&'.
      *
      * @param parameters - The query string parameters to be canonicalized.
-     * @return - A canonicalized form for the specified query string parameters.
+     * @return - A canonicalized form for the specified query string parameters..
+     
      */
     public static String getCanonicalizedQueryString(Map<String, String> parameters) {
         if (parameters == null || parameters.isEmpty()) {

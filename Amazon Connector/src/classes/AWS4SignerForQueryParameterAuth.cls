@@ -100,9 +100,9 @@ public with sharing class AWS4SignerForQueryParameterAuth extends AWS4SignerBase
         // form up the authorization parameters for the caller to place in the query string
         String authString = '';
         if(serviceName.Equals('sqs')) {
-         authString += 'Action=' + queryParameters.get('Action');
+         authString += 'Action=' + queryParameters.get('Action')+'&';
         }
-        authString += '&X-Amz-Algorithm=' + queryParameters.get('X-Amz-Algorithm');
+        authString += 'X-Amz-Algorithm=' + queryParameters.get('X-Amz-Algorithm');
         authString += '&X-Amz-Credential=' + queryParameters.get('X-Amz-Credential');
         authString +='&X-Amz-Date=' + queryParameters.get('X-Amz-Date');
         authString +='&X-Amz-Expires=' + queryParameters.get('X-Amz-Expires');

@@ -4,7 +4,7 @@
  * @author - Tejashree Chavan
  *
  */
-public with sharing class PresignedUrlSample {
+public with sharing class PresignedUrl {
      /**
      * Construct a basic presigned url to the object '/ExampleObject.txt' in the
      * given bucket and region using path-style object addressing. The signature
@@ -19,8 +19,12 @@ public with sharing class PresignedUrlSample {
             String awsSecretKey,
             String service
     ) {
+        system.debug('-----------End point URl------------'+endPointUrl);
         URL endpoint;
         try {
+             if(fileName.contains(' ')) {
+               fileName=fileName.replace(' ','+');
+            }
         endpoint = new URL(endPointUrl+fileName);
         } 
         catch (Exception e) {
@@ -41,10 +45,10 @@ public with sharing class PresignedUrlSample {
         AWS4SignerForQueryParameterAuth signer = new AWS4SignerForQueryParameterAuth(
             endpoint, mode, service, regionName);
         String authorizationQueryParameters = signer.computeSignature(headers, 
-            queryParams,
-            AWS4SignerBase.UNSIGNED_PAYLOAD, 
-            awsAccessKey, 
-            awsSecretKey);
+                                                                      queryParams,
+                                                                      AWS4SignerBase.UNSIGNED_PAYLOAD, 
+                                                                      awsAccessKey, 
+                                                                      awsSecretKey);
 
         // build the presigned url to incorporate the authorization elements as query parameters
         String presignedUrl = endpoint.toString() + '?' + authorizationQueryParameters;
